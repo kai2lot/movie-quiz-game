@@ -8,9 +8,16 @@ class Quiz:
         question: 퀴즈 문제 문자열.
         choices: 4개의 선택지 문자열 리스트.
         answer: 정답 번호 (1~4).
+        hint: 문제 풀이에 도움을 주는 힌트 문자열.
     """
 
-    def __init__(self, question: str, choices: list[str], answer: int) -> None:
+    def __init__(
+        self,
+        question: str,
+        choices: list[str],
+        answer: int,
+        hint: str = "등록된 힌트가 없습니다.",
+    ) -> None:
         """Quiz 인스턴스를 초기화한다."""
         if len(choices) != 4:
             raise ValueError("선택지는 반드시 4개여야 합니다.")
@@ -19,6 +26,7 @@ class Quiz:
         self.question = question
         self.choices = choices
         self.answer = answer
+        self.hint = hint.strip() if hint and hint.strip() else "등록된 힌트가 없습니다."
 
     def display(self, index: int | None = None) -> None:
         """퀴즈 문제와 4개의 선택지를 화면에 출력한다."""
@@ -42,6 +50,7 @@ class Quiz:
             "question": self.question,
             "choices": self.choices,
             "answer": self.answer,
+            "hint": self.hint,
         }
 
     @classmethod
@@ -50,9 +59,10 @@ class Quiz:
         question = str(data["question"]).strip()
         choices = [str(c).strip() for c in data["choices"]]
         answer = int(data["answer"])
+        hint = str(data.get("hint", "등록된 힌트가 없습니다.")).strip()
         if not question or any(not c for c in choices):
             raise ValueError("퀴즈 문제나 선택지가 비어 있습니다.")
-        return cls(question=question, choices=choices, answer=answer)
+        return cls(question=question, choices=choices, answer=answer, hint=hint)
 
 
 def get_default_quizzes() -> list[Quiz]:
@@ -62,26 +72,30 @@ def get_default_quizzes() -> list[Quiz]:
             question="마블 시네마틱 유니버스(MCU)에서 타노스가 모은 인피니티 스톤의 총 개수는?",
             choices=["4개", "5개", "6개", "7개"],
             answer=3,
+            hint="공간, 마음, 현실, 힘, 시간, 영혼 스톤이 있습니다.",
         ),
         Quiz(
             question="한국 영화 최초로 칸 영화제 황금종려상과 아카데미 작품상을 동시에 수상한 영화 '기생충'의 감독은?",
             choices=["박찬욱", "봉준호", "나홍진", "류승완"],
             answer=2,
+            hint="별명이 '봉테일'이며 영화 '괴물', '살인의 추억', '설국열차'를 연출했습니다.",
         ),
         Quiz(
             question="크리스토퍼 놀란 감독의 영화 '인터스텔라'에서 주인공 쿠퍼가 자녀 머피에게 메시지를 전달할 때 사용한 수단은?",
             choices=["손목시계 초침(모스 부호)", "라디오 주파수", "낡은 사진첩", "나침반 바늘"],
             answer=1,
+            hint="쿠퍼가 우주로 떠나기 전 머피에게 똑같은 물건을 하나 주고 떠났습니다.",
         ),
         Quiz(
             question="영화 '매트릭스'에서 네오가 진실을 알게 되기 위해 모피어스에게서 받아 삼킨 알약의 색깔은?",
             choices=["파란색 알약", "초록색 알약", "빨간색 알약", "노란색 알약"],
             answer=3,
+            hint="파란색 알약을 먹으면 잠에서 깨어나 기존의 가상 세계에 머무르게 됩니다.",
         ),
         Quiz(
             question="영화 '타이타닉'의 감독이자 '아바타' 시리즈를 연출한 세계적인 거장 감독은?",
             choices=["스티븐 스필버그", "제임스 카메론", "리들리 스콧", "피터 잭슨"],
             answer=2,
+            hint="'터미네이터', '에이리언 2'도 연출한 캐나다 출신의 거장 감독입니다.",
         ),
     ]
-
