@@ -74,8 +74,34 @@ class QuizGame:
             print("\n\n⚠️ 입력이 중단되어 프로그램을 안전하게 종료합니다.")
 
     def play_quiz(self) -> None:
-        """퀴즈 풀기 기능을 수행한다."""
-        print("\n[안내] 퀴즈 풀기 기능 준비 중입니다.")
+        """저장된 퀴즈를 출제하고 사용자의 정답을 채점하여 결과를 표시한다."""
+        if not self.quizzes:
+            print("\n⚠️ 등록된 퀴즈가 없습니다. 먼저 퀴즈를 추가해주세요!")
+            return
+
+        total = len(self.quizzes)
+        correct_count = 0
+        print(f"\n📝 퀴즈를 시작합니다! (총 {total}문제)")
+
+        for idx, quiz in enumerate(self.quizzes, start=1):
+            print("\n----------------------------------------")
+            quiz.display(index=idx)
+            user_answer = self.get_int_input("정답 입력 (1-4): ", 1, 4)
+            if quiz.check_answer(user_answer):
+                print("✅ 정답입니다!")
+                correct_count += 1
+            else:
+                correct_text = quiz.choices[quiz.answer - 1]
+                print(f"❌ 오답입니다! (정답: {quiz.answer}번 - {correct_text})")
+
+        score = round((correct_count / total) * 100)
+        self.has_played = True
+        print("\n========================================")
+        print(f"🏆 결과: {total}문제 중 {correct_count}문제 정답! ({score}점)")
+        if score > self.best_score:
+            self.best_score = score
+            print("🎉 새로운 최고 점수입니다!")
+        print("========================================")
 
     def add_quiz(self) -> None:
         """새로운 퀴즈를 추가한다."""
