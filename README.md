@@ -101,3 +101,8 @@ movie-quiz-game/
     ]
 }
 ```
+
+---
+## 7. Git 저장소 복제(clone & pull) 실습 완료
+- 별도 로컬 디렉터리(movie-quiz-game-clone)에 원격 저장소를 git clone하여 수정 후 push하고, 기존 작업 디렉터리에서 git pull로 동기화 완료하였습니다.
+
