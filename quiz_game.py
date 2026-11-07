@@ -118,8 +118,16 @@ class QuizGame:
         print("\n✅ 퀴즈가 추가되었습니다!")
 
     def list_quizzes(self) -> None:
-        """등록된 퀴즈 목록을 출력한다."""
-        print("\n[안내] 퀴즈 목록 기능 준비 중입니다.")
+        """등록된 퀴즈 목록을 화면에 출력한다."""
+        if not self.quizzes:
+            print("\n⚠️ 등록된 퀴즈가 없습니다.")
+            return
+
+        print(f"\n📋 등록된 퀴즈 목록 (총 {len(self.quizzes)}개)")
+        print("----------------------------------------")
+        for idx, quiz in enumerate(self.quizzes, start=1):
+            print(f"[{idx}] {quiz.question}")
+        print("----------------------------------------")
 
     def show_score(self) -> None:
         """최고 점수를 확인한다."""
