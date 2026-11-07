@@ -10,6 +10,8 @@ class QuizGame:
         """QuizGame 인스턴스를 초기화한다."""
         self.quizzes: list[Quiz] = get_default_quizzes()
         self.best_score: int = 0
+        self.best_correct: int = 0
+        self.best_total: int = 0
         self.has_played: bool = False
 
     @staticmethod
@@ -95,11 +97,14 @@ class QuizGame:
                 print(f"❌ 오답입니다! (정답: {quiz.answer}번 - {correct_text})")
 
         score = round((correct_count / total) * 100)
+        is_first_play = not self.has_played
         self.has_played = True
         print("\n========================================")
         print(f"🏆 결과: {total}문제 중 {correct_count}문제 정답! ({score}점)")
-        if score > self.best_score:
+        if is_first_play or score > self.best_score:
             self.best_score = score
+            self.best_correct = correct_count
+            self.best_total = total
             print("🎉 새로운 최고 점수입니다!")
         print("========================================")
 
@@ -130,5 +135,15 @@ class QuizGame:
         print("----------------------------------------")
 
     def show_score(self) -> None:
-        """최고 점수를 확인한다."""
-        print("\n[안내] 점수 확인 기능 준비 중입니다.")
+        """최고 점수를 확인하여 출력한다."""
+        if not self.has_played:
+            print("\n📊 아직 퀴즈를 풀지 않았습니다. 퀴즈를 풀고 최고 점수에 도전해보세요!")
+            return
+
+        if self.best_total > 0:
+            print(
+                f"\n🏆 최고 점수: {self.best_score}점 "
+                f"({self.best_total}문제 중 {self.best_correct}문제 정답)"
+            )
+        else:
+            print(f"\n🏆 최고 점수: {self.best_score}점")
