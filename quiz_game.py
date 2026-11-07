@@ -104,8 +104,18 @@ class QuizGame:
         print("========================================")
 
     def add_quiz(self) -> None:
-        """새로운 퀴즈를 추가한다."""
-        print("\n[안내] 퀴즈 추가 기능 준비 중입니다.")
+        """사용자로부터 문제, 선택지 4개, 정답 번호를 입력받아 새 퀴즈를 등록한다."""
+        print("\n📌 새로운 퀴즈를 추가합니다.")
+        question = self.get_non_empty_input("문제를 입력하세요: ")
+        choices: list[str] = []
+        for idx in range(1, 5):
+            choice = self.get_non_empty_input(f"선택지 {idx}: ")
+            choices.append(choice)
+        answer = self.get_int_input("정답 번호 (1-4): ", 1, 4)
+
+        new_quiz = Quiz(question=question, choices=choices, answer=answer)
+        self.quizzes.append(new_quiz)
+        print("\n✅ 퀴즈가 추가되었습니다!")
 
     def list_quizzes(self) -> None:
         """등록된 퀴즈 목록을 출력한다."""
