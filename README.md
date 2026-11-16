@@ -58,13 +58,34 @@ movie-quiz-game/
 ├── quiz.py          # 개별 퀴즈 데이터와 동작을 정의하는 Quiz 클래스 및 기본 퀴즈 5문항
 ├── quiz_game.py     # 게임 진행, 입출력 검증, 파일 저장/복구를 담당하는 QuizGame 클래스
 ├── state.json       # 퀴즈 목록, 최고 점수, 플레이 히스토리가 저장되는 JSON 데이터 파일 (UTF-8)
+├── screenshots/     # 실행 화면 스크린샷 이미지 폴더
+│   ├── 01_quiz_play.png
+│   ├── 02_quiz_add_list.png
+│   ├── 03_score_delete_exit.png
+│   └── 04_persistence_recovery.png
 ├── .gitignore       # Git 버전 관리 제외 파일 목록 (__pycache__ 등)
 └── README.md        # 프로젝트 소개 및 문서
 ```
 
 ---
 
-## 6. 데이터 파일 설명 (`state.json`)
+## 6. 실행 화면 스크린샷
+
+### 6-1. 메인 메뉴, 비정상 입력 검증 및 퀴즈 풀기 (`1번`: 문제 수 선택 · 힌트 차감 · 결과 출력)
+![퀴즈 풀기 및 입력 검증 실행 화면](screenshots/01_quiz_play.png)
+
+### 6-2. 새로운 퀴즈 추가 (`2번`) 및 전체 퀴즈 목록 조회 (`3번`)
+![퀴즈 추가 및 목록 조회 실행 화면](screenshots/02_quiz_add_list.png)
+
+### 6-3. 최고 점수·히스토리 확인 (`4번`), 퀴즈 삭제 (`6번`), 안전 종료 (`5번`)
+![점수 히스토리 확인 및 퀴즈 삭제 실행 화면](screenshots/03_score_delete_exit.png)
+
+### 6-4. `state.json` 데이터 영속성 유지 확인 및 파일 손상 시 자동 복구
+![파일 영속성 및 손상 자동 복구 실행 화면](screenshots/04_persistence_recovery.png)
+
+---
+
+## 7. 데이터 파일 설명 (`state.json`)
 
 - **파일 경로**: 프로젝트 루트 디렉터리의 `state.json`
 - **인코딩**: `UTF-8`
@@ -103,6 +124,5 @@ movie-quiz-game/
 ```
 
 ---
-## 7. Git 저장소 복제(clone & pull) 실습 완료
-- 별도 로컬 디렉터리(movie-quiz-game-clone)에 원격 저장소를 git clone하여 수정 후 push하고, 기존 작업 디렉터리에서 git pull로 동기화 완료하였습니다.
-
+## 8. Git 저장소 복제(clone & pull) 실습 완료
+- 별도 로컬 디렉터리(`movie-quiz-game-clone`)에 원격 저장소를 `git clone`하여 수정 후 `push`하고, 기존 작업 디렉터리에서 `git pull`로 동기화 완료하였습니다.
